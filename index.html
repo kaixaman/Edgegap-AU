@@ -1,632 +1,639 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WildGuard - Protect Our Wildlife</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Мир во всём мире | Международное движение за мир</title>
     <style>
-        :root {
-            --primary: #2d6a4f;
-            --primary-light: #40916c;
-            --accent: #d4a373;
-            --dark: #1b4332;
-            --text: #2d3436;
-            --gray: #636e72;
-            --light: #f8f9f7;
-            --white: #ffffff;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Poppins', sans-serif; line-height: 1.7; color: var(--text); }
 
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            transition: all 0.4s;
+        html {
+            scroll-behavior: smooth;
         }
-        .navbar.scrolled {
-            background: rgba(255,255,255,0.98);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-        }
-        .navbar.scrolled .logo, .navbar.scrolled .nav-links a { color: var(--dark); }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--white);
-            text-decoration: none;
-        }
-        .logo i { color: var(--accent); }
-        .nav-links { display: flex; list-style: none; gap: 2rem; }
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover { color: var(--accent); }
 
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--dark);
-            position: relative;
-            overflow: hidden;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d1117;
+            color: #ffffff;
+            line-height: 1.6;
         }
-        .hero::before {
-            content: '';
+
+        #particles {
             position: absolute;
-            inset: 0;
-            background: url('https://images.unsplash.com/photo-1474511320723-9a56873571b7?w=1920') center/cover;
-            opacity: 0.3;
-            z-index: 0;
-        }
-        #particles { 
-            position: absolute; 
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 1;
-            pointer-events: auto;
-        }
-        .hero-content {
-            position: relative;
-            text-align: center;
-            color: var(--white);
-            max-width: 750px;
-            padding: 0 2rem;
-            z-index: 2;
             pointer-events: none;
         }
-        .hero-content * { pointer-events: auto; }
-        .hero-badge {
-            display: inline-block;
-            background: rgba(212,163,115,0.2);
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-        .hero h1 { font-size: 3.2rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.2; }
-        .hero h1 span { color: var(--accent); }
-        .hero p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; }
-        .btn {
-            padding: 0.9rem 1.8rem;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 0.4rem;
-        }
-        .btn-primary {
-            background: var(--accent);
-            color: var(--dark);
-        }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,163,115,0.4); }
-        .btn-outline { border: 2px solid var(--white); color: var(--white); }
-        .btn-outline:hover { background: var(--white); color: var(--dark); }
 
-        /* Stats */
-        .stats { background: var(--white); padding: 4rem 5%; }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .stat-card {
-            padding: 1.5rem;
-            border-radius: 12px;
-            background: var(--light);
-            border: 1px solid #e8e8e8;
-            transition: transform 0.3s;
-        }
-        .stat-card:hover { transform: translateY(-5px); }
-        .stat-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 0.8rem;
-            color: var(--white);
-            font-size: 1.1rem;
-        }
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        .stat-label { color: var(--gray); font-size: 0.85rem; }
-
-        /* Section Common */
-        .section-header { text-align: center; max-width: 550px; margin: 0 auto 2.5rem; }
-        .section-badge {
-            display: inline-block;
-            background: rgba(45,106,79,0.1);
-            color: var(--primary);
-            padding: 0.4rem 1rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-        }
-        .section-header h2 { font-size: 2.2rem; font-weight: 700; color: var(--text); margin-bottom: 0.8rem; }
-        .section-header p { color: var(--gray); }
-
-        /* Species */
-        .species { padding: 5rem 5%; background: var(--light); }
-        .species-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .species-card {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            height: 340px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .species-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .species-card:hover img { transform: scale(1.1); }
-        .species-overlay {
-            position: absolute;
-            bottom: 0;
+        /* Навигация */
+        nav {
+            position: fixed;
+            top: 0;
             left: 0;
             right: 0;
-            padding: 1.2rem;
-            background: linear-gradient(transparent, rgba(27,67,50,0.95));
-            color: var(--white);
-            transform: translateY(30px);
-            transition: transform 0.4s;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
-        .species-card:hover .species-overlay { transform: translateY(0); }
-        .species-status {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 0.4rem;
-        }
-        .status-critical { background: #c0392b; }
-        .status-endangered { background: #d35400; }
-        .status-vulnerable { background: #f39c12; color: var(--dark); }
-        .species-overlay h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.2rem; }
-        .species-overlay p { font-size: 0.8rem; opacity: 0.9; }
 
-        /* Actions */
-        .actions { padding: 5rem 5%; background: var(--white); }
-        .actions-grid {
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 1.8em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #d4a853;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d4a853;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(30, 58, 95, 0.4);
+        }
+
+        /* Герой секция */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 80px;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1a2332 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 168, 83, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(30, 58, 95, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.03) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .hero h1 {
+            font-size: 4em;
+            font-weight: 800;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #fff 0%, #d4a853 50%, #f5f5f5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        .hero-subtitle { font-size: 1.3em; color: rgba(255,255,255,0.8); margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            color: #fff;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(30, 58, 95, 0.4); }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); }
+        section { padding: 100px 50px; }
+
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-tag { color: #d4a853; font-size: 0.9em; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+        .section-title { font-size: 2.8em; font-weight: 700; margin-bottom: 20px; }
+        .section-desc { color: rgba(255,255,255,0.7); font-size: 1.1em; max-width: 600px; margin: 0 auto; }
+
+        /* О нас */
+        .about {
+            background: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, rgba(30,58,95,0.3) 0%, rgba(45,90,135,0.3) 100%);
+            border-radius: 20px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+        .about-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30,58,95,0.2) 0%, rgba(45,90,135,0.2) 100%);
+            border-radius: 20px;
+            pointer-events: none;
+        }
+
+        .about-content h3 { font-size: 2em; margin-bottom: 20px; }
+        .about-content p { color: rgba(255,255,255,0.8); margin-bottom: 20px; font-size: 1.05em; }
+        .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
+
+        .stat-item { text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px; }
+        .stat-number { font-size: 2.5em; font-weight: 700; color: #d4a853; }
+        .stat-label { font-size: 0.9em; color: rgba(255,255,255,0.6); }
+
+        /* Ценности */
+        .values {
+            background: #111820;
+        }
+
+        .values-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            max-width: 950px;
+            gap: 30px;
+            max-width: 1200px;
             margin: 0 auto;
         }
-        .action-card {
-            background: var(--light);
-            border-radius: 12px;
-            padding: 1.8rem;
+
+        .value-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
             text-align: center;
-            transition: all 0.3s;
-            border: 1px solid #e8e8e8;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
         }
-        .action-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 10px 30px rgba(45,106,79,0.1);
-            border-color: var(--primary);
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #1e3a5f, #d4a853);
+            transform: scaleX(0);
+            transition: transform 0.4s;
         }
-        .action-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary);
-            border-radius: 12px;
+
+        .value-card:hover { transform: translateY(-10px); background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .value-card:hover::before { transform: scaleX(1); }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
-            color: var(--white);
-            font-size: 1.3rem;
+            font-size: 2.5em;
+            margin: 0 auto 25px;
         }
-        .action-card h3 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
-        .action-card p { color: var(--gray); font-size: 0.85rem; }
+        .value-card h3 { font-size: 1.4em; margin-bottom: 15px; }
+        .value-card p { color: rgba(255,255,255,0.7); font-size: 0.95em; }
 
-        /* Newsletter */
-        .newsletter {
-            padding: 4rem 5%;
-            background: var(--dark);
+        /* Цитаты */
+        .quotes {
+            background: linear-gradient(180deg, #111820 0%, #0d1117 100%);
+        }
+
+        .quotes-slider {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .quote-item {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.15) 0%, rgba(45, 90, 135, 0.1) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 25px;
+            padding: 50px;
             text-align: center;
-            color: var(--white);
+            margin-bottom: 30px;
         }
-        .newsletter h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.8rem; }
-        .newsletter p { opacity: 0.8; margin-bottom: 1.5rem; }
-        .newsletter-form { display: flex; gap: 0.8rem; max-width: 420px; margin: 0 auto; }
-        .newsletter-form input {
-            flex: 1;
-            padding: 0.9rem 1.2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            outline: none;
-        }
-        .newsletter-form button {
-            padding: 0.9rem 1.3rem;
-            background: var(--accent);
-            color: var(--dark);
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .newsletter-form button:hover { transform: scale(1.05); }
 
-        /* Footer */
-        footer { background: #1a1a1a; color: var(--white); padding: 3rem 5% 1.5rem; }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 2rem;
-            max-width: 1100px;
-            margin: 0 auto 2rem;
+        .quote-icon { font-size: 3em; color: #d4a853; margin-bottom: 20px; }
+        .quote-text { font-size: 1.5em; font-style: italic; margin-bottom: 25px; line-height: 1.6; }
+        .quote-author { color: #d4a853; font-weight: 600; font-size: 1.1em; }
+
+        /* Призыв */
+        .cta {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        .footer-brand p { color: rgba(255,255,255,0.6); margin: 0.8rem 0; font-size: 0.85rem; }
-        .social-links { display: flex; gap: 0.6rem; }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 { font-size: 3em; margin-bottom: 20px; }
+        .cta p { font-size: 1.2em; margin-bottom: 35px; opacity: 0.9; }
+
+        .cta .btn-primary {
+            background: #d4a853;
+            color: #0d1117;
+        }
+        .cta .btn-primary:hover { box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+
+        /* Футер */
+        footer {
+            background: #080b0f;
+            padding: 60px 50px 30px;
+        }
+
+        .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 50px; max-width: 1200px; margin: 0 auto 50px; }
+        .footer-brand .logo { margin-bottom: 20px; }
+        .footer-brand p { color: rgba(255,255,255,0.6); font-size: 0.95em; margin-bottom: 20px; }
+        .social-links { display: flex; gap: 15px; }
+
         .social-links a {
-            width: 36px;
-            height: 36px;
-            background: var(--primary);
-            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
-            transition: transform 0.3s;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: all 0.3s;
         }
-        .social-links a:hover { transform: translateY(-3px); background: var(--primary-light); }
-        .footer-column h4 { font-size: 0.95rem; margin-bottom: 0.8rem; color: var(--accent); }
-        .footer-column ul { list-style: none; }
-        .footer-column li { margin-bottom: 0.5rem; }
-        .footer-column a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
-        .footer-column a:hover { color: var(--accent); }
+        .social-links a:hover { background: #1e3a5f; transform: translateY(-3px); }
+        .footer-links h4 { font-size: 1.1em; margin-bottom: 20px; color: #fff; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: #d4a853; }
         .footer-bottom {
             border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 1.5rem;
+            padding-top: 30px;
             text-align: center;
             color: rgba(255,255,255,0.5);
-            font-size: 0.8rem;
+            font-size: 0.9em;
         }
 
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero h1 { font-size: 2.4rem; }
-            .stats-grid, .species-grid { grid-template-columns: repeat(2, 1fr); }
-            .actions-grid { grid-template-columns: 1fr 1fr; }
-            .footer-grid { grid-template-columns: repeat(2, 1fr); }
-        }
+        /* Адаптивность */
         @media (max-width: 768px) {
+            nav { padding: 15px 20px; }
             .nav-links { display: none; }
-            .hero h1 { font-size: 1.9rem; }
-            .section-header h2 { font-size: 1.7rem; }
-            .species-grid, .actions-grid { grid-template-columns: 1fr; }
-            .species-card { height: 280px; }
-            .newsletter-form { flex-direction: column; }
-            .footer-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5em; }
+            section { padding: 60px 20px; }
+            .section-title { font-size: 2em; }
+            .values-grid { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-stats { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .social-links { justify-content: center; }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="#" class="logo"><i class="fas fa-paw"></i> WildGuard</a>
+    <!-- 粒子背景 -->
+
+    <!-- Навигация -->
+    <nav>
+        <a href="#" class="logo">
+            <span class="logo-icon">🕊️</span>
+            <span>МирВоВсworлдe</span>
+        </a>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#species">Species</a></li>
-            <li><a href="#actions">Take Action</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#values">Ценности</a></li>
+            <li><a href="#quotes">Цитаты</a></li>
+            <li><a href="#action">Действия</a></li>
         </ul>
+        <a href="#action" class="nav-btn">Присоединиться</a>
     </nav>
 
-    <section id="home" class="hero">
+    <!-- Герой -->
+    <section class="hero">
         <canvas id="particles"></canvas>
         <div class="hero-content">
-            <span class="hero-badge">🌍 Protecting Wildlife Since 2010</span>
-            <h1>Every Species <span>Matters</span> in Our World</h1>
-            <p>Join us in our mission to protect endangered wildlife and preserve biodiversity for future generations.</p>
-            <div>
-                <a href="#actions" class="btn btn-primary"><i class="fas fa-heart"></i> Make a Donation</a>
-                <a href="#species" class="btn btn-outline"><i class="fas fa-paw"></i> Learn More</a>
+            <div class="hero-badge">🌍 Международное движение за мир</div>
+            <h1>Мир во всём мире начинается с нас</h1>
+            <p class="hero-subtitle">
+                Мы объединяем людей со всего мира ради общей цели — 
+                построения будущего без войн, насилия и страданий. 
+                Каждый голос важен. Каждое действие имеет значение.
+            </p>
+            <div class="hero-buttons">
+                <a href="#action" class="btn-primary">Узнать больше</a>
+                <a href="#about" class="btn-secondary">Наша миссия</a>
             </div>
         </div>
     </section>
 
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-globe-americas"></i></div>
-                <div class="stat-number">50+</div>
-                <div class="stat-label">Countries Protected</div>
+    <!-- О нас -->
+    <section class="about" id="about">
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80" alt="Мирный пейзаж">
             </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-paw"></i></div>
-                <div class="stat-number">1M+</div>
-                <div class="stat-label">Animals Saved</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-tree"></i></div>
-                <div class="stat-number">500K</div>
-                <div class="stat-label">Acres Preserved</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-users"></i></div>
-                <div class="stat-number">100K+</div>
-                <div class="stat-label">Active Supporters</div>
+            <div class="about-content">
+                <div class="section-tag">О нашем движении</div>
+                <h3>Вместе мы сильнее</h3>
+                <p>
+                    Наше движение объединяет миллионы людей по всему миру, 
+                    которые верят в силу диалога, взаимопонимания и сотрудничества. 
+                    Мы работаем над тем, чтобы голос мира был услышан.
+                </p>
+                <p>
+                    Война разрушает семьи, города и целые народы. Мы убеждены, 
+                    что конфликты можно и нужно решать мирным путём. История 
+                    показывает: там, где есть воля к миру, есть и путь к нему.
+                </p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">193</div>
+                        <div class="stat-label">Страны мира</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">8B+</div>
+                        <div class="stat-label">Людей на Земле</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Общий дом</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="species" class="species">
+    <!-- Ценности -->
+    <section class="values" id="values">
         <div class="section-header">
-            <span class="section-badge">Endangered Species</span>
-            <h2>Wildlife We're Fighting to Protect</h2>
-            <p>These magnificent creatures are facing extinction. Learn about them and how you can help.</p>
+            <div class="section-tag">Наши принципы</div>
+            <h2 class="section-title">Ценности мирного движения</h2>
+            <p class="section-desc">
+                Эти принципы объединяют нас и направляют нашу деятельность 
+                на пути к миру во всём мире.
+            </p>
         </div>
-        <div class="species-grid">
-            <div class="species-card">
-                <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=500" alt="Giant Panda">
-                <div class="species-overlay">
-                    <span class="species-status status-vulnerable">Vulnerable</span>
-                    <h3>Giant Panda</h3>
-                    <p>Only 1,800 remain in the wild bamboo forests of China.</p>
-                </div>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3>Единство</h3>
+                <p>Мы сильнее вместе. Объединяя усилия людей разных культур и народов, мы создаём непобедимую силу добра.</p>
             </div>
-            <div class="species-card">
-                <img src="https://images.unsplash.com/photo-1551316679-9c6ae9dec224?w=500" alt="Siberian Tiger">
-                <div class="species-overlay">
-                    <span class="species-status status-endangered">Endangered</span>
-                    <h3>Siberian Tiger</h3>
-                    <p>Fewer than 500 in the wild. The largest of all wild cats.</p>
-                </div>
+            <div class="value-card">
+                <div class="value-icon">💬</div>
+                <h3>Диалог</h3>
+                <p>Разговор — мост между людьми. Через открытое общение мы находим общий язык и мирные решения.</p>
             </div>
-            <div class="species-card">
-                <img src="https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=500" alt="African Elephant">
-                <div class="species-overlay">
-                    <span class="species-status status-endangered">Endangered</span>
-                    <h3>African Elephant</h3>
-                    <p>Poaching claims 20,000 elephants annually for ivory.</p>
-                </div>
+            <div class="value-card">
+                <div class="value-icon">❤️</div>
+                <h3>Сострадание</h3>
+                <p>Способность чувствовать боль другого делает нас людьми. Сострадание — основа человечности.</p>
             </div>
-            <div class="species-card">
-                <img src="https://images.unsplash.com/photo-1535338454770-8be927b5a00b?w=500" alt="Sea Turtle">
-                <div class="species-overlay">
-                    <span class="species-status status-critical">Critical</span>
-                    <h3>Sea Turtle</h3>
-                    <p>6 of 7 species threatened by ocean pollution.</p>
-                </div>
+            <div class="value-card">
+                <div class="value-icon">⚖️</div>
+                <h3>Справедливость</h3>
+                <p>Равные права и возможности для всех — фундамент мирного и гармоничного общества.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🌱</div>
+                <h3>Надежда</h3>
+                <p>Вера в лучшее будущее даёт силы продолжать путь к миру, несмотря на все трудности.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🌍</div>
+                <h3>Ответственность</h3>
+                <p>Мы несём ответственность за нашу планету и будущее следующих поколений.</p>
             </div>
         </div>
     </section>
 
-    <section id="actions" class="actions">
+    <!-- Цитаты -->
+    <section class="quotes" id="quotes">
         <div class="section-header">
-            <span class="section-badge">Get Involved</span>
-            <h2>How You Can Help</h2>
-            <p>Every action counts. Here are meaningful ways you can contribute to wildlife conservation.</p>
+            <div class="section-tag">Мудрость веков</div>
+            <h2 class="section-title">Слова о мире</h2>
+            <p class="section-desc">
+                Великие мыслители всех времён говорили о важности мира.
+            </p>
         </div>
-        <div class="actions-grid">
-            <div class="action-card">
-                <div class="action-icon"><i class="fas fa-hand-holding-heart"></i></div>
-                <h3>Make a Donation</h3>
-                <p>Your support directly funds conservation programs worldwide.</p>
+        <div class="quotes-slider">
+            <div class="quote-item">
+                <div class="quote-icon">❝</div>
+                <p class="quote-text">
+                    «Мир нельзя удержать силой; его можно достичь лишь пониманием.»
+                </p>
+                <p class="quote-author">— Альберт Эйнштейн</p>
             </div>
-            <div class="action-card">
-                <div class="action-icon"><i class="fas fa-users"></i></div>
-                <h3>Volunteer With Us</h3>
-                <p>Join our global network of volunteers for wildlife protection.</p>
-            </div>
-            <div class="action-card">
-                <div class="action-icon"><i class="fas fa-share-alt"></i></div>
-                <h3>Spread Awareness</h3>
-                <p>Share our mission and educate others about conservation.</p>
-            </div>
-            <div class="action-card">
-                <div class="action-icon"><i class="fas fa-shopping-bag"></i></div>
-                <h3>Shop Responsibly</h3>
-                <p>Avoid products from endangered species.</p>
-            </div>
-            <div class="action-card">
-                <div class="action-icon"><i class="fas fa-paw"></i></div>
-                <h3>Adopt an Animal</h3>
-                <p>Symbolically adopt and support endangered animals.</p>
-            </div>
-            <div class="action-card">
-                <div class="action-icon"><i class="fas fa-bullhorn"></i></div>
-                <h3>Advocate for Change</h3>
-                <p>Support legislation that protects wildlife habitats.</p>
+            <div class="quote-item">
+                <div class="quote-icon">❝</div>
+                <p class="quote-text">
+                    «Ненависть не прекращается ненавистью, но лишь любовью — таков вечный закон.»
+                </p>
+                <p class="quote-author">— Будда</p>
             </div>
         </div>
     </section>
 
-    <section class="newsletter">
-        <h2>Stay Connected</h2>
-        <p>Subscribe to our newsletter for the latest updates on wildlife conservation.</p>
-        <form class="newsletter-form">
-            <input type="email" placeholder="Enter your email" required>
-            <button type="submit">Subscribe</button>
-        </form>
+    <!-- Призыв к действию -->
+    <section class="cta" id="action">
+        <div class="cta-content">
+            <h2>Присоединяйтесь к движению за мир</h2>
+            <p>
+                Каждый из нас может внести свой вклад в построение мирного будущего. 
+                Говорите о мире, учите детей добру, помогайте нуждающимся.
+            </p>
+            <a href="#" class="btn-primary">Начать сегодня</a>
+        </div>
     </section>
 
-    <footer id="contact">
-        <div class="footer-grid">
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
             <div class="footer-brand">
-                <a href="#" class="logo"><i class="fas fa-paw"></i> WildGuard</a>
-                <p>Dedicated to protecting endangered wildlife and preserving biodiversity for future generations.</p>
+                <a href="#" class="logo">
+                    <span class="logo-icon">🕊️</span>
+                    <span>МирВоВсworлдe</span>
+                </a>
+                <p>Международное движение за мир во всём мире. Вместе мы можем изменить будущее.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📷</a>
+                    <a href="#">📺</a>
                 </div>
             </div>
-            <div class="footer-column">
-                <h4>Quick Links</h4>
+            <div class="footer-links">
+                <h4>Навигация</h4>
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#species">Species</a></li>
-                    <li><a href="#actions">Get Involved</a></li>
-                    <li><a href="#">News</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#values">Ценности</a></li>
+                    <li><a href="#quotes">Цитаты</a></li>
+                    <li><a href="#action">Действия</a></li>
                 </ul>
             </div>
-            <div class="footer-column">
-                <h4>Support</h4>
+            <div class="footer-links">
+                <h4>Ресурсы</h4>
                 <ul>
-                    <li><a href="#">Donate</a></li>
-                    <li><a href="#">Adopt</a></li>
-                    <li><a href="#">Volunteer</a></li>
-                    <li><a href="#">Partners</a></li>
+                    <li><a href="#">Новости</a></li>
+                    <li><a href="#">События</a></li>
+                    <li><a href="#">Публикации</a></li>
+                    <li><a href="#">Медиа</a></li>
                 </ul>
             </div>
-            <div class="footer-column">
-                <h4>Contact</h4>
+            <div class="footer-links">
+                <h4>Контакты</h4>
                 <ul>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Связаться</a></li>
+                    <li><a href="#">Партнёрство</a></li>
+                    <li><a href="#">Пресса</a></li>
                     <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Privacy</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 WildGuard. All rights reserved. Together, we protect our planet's wildlife.</p>
+            <p>© 2025 Движение за мир во всём мире. Мир — это не мечта, это выбор каждого дня.</p>
         </div>
     </footer>
 
     <script>
-        // Navbar scroll
-        window.addEventListener('scroll', () => {
-            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // Particle animation
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
+        const canvas = document.getElementById('particles'), ctx = canvas.getContext('2d');
         const hero = document.querySelector('.hero');
-        let particles = [];
-        let mouse = { x: null, y: null };
-
-        function resize() {
-            canvas.width = hero.offsetWidth;
-            canvas.height = hero.offsetHeight;
-            init();
-        }
-        
-        window.addEventListener('load', resize);
-        window.addEventListener('resize', resize);
-
+        let particles = []; const particleCount = 80, maxDistance = 150;
+        function resize() { canvas.width = hero.offsetWidth; canvas.height = hero.offsetHeight; }
+        resize(); window.addEventListener('resize', resize);
         class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.vx = (Math.random() - 0.5) * 0.3;
-                this.vy = (Math.random() - 0.5) * 0.3;
-            }
-            update() {
-                // 鼠标推开效果
-                if (mouse.x != null) {
-                    let dx = this.x - mouse.x;
-                    let dy = this.y - mouse.y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 100) {
-                        let force = (100 - dist) / 100;
-                        this.x += (dx / dist) * force * 3;
-                        this.y += (dy / dist) * force * 3;
-                    }
-                }
-                this.x += this.vx;
-                this.y += this.vy;
-                // 边界反弹
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-                // 保持在边界内
-                this.x = Math.max(0, Math.min(canvas.width, this.x));
-                this.y = Math.max(0, Math.min(canvas.height, this.y));
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(212,163,115,0.8)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.vx = (Math.random() - 0.5) * 0.5; this.vy = (Math.random() - 0.5) * 0.5; this.radius = Math.random() * 2 + 1; }
+            update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > canvas.width) this.vx *= -1; if (this.y < 0 || this.y > canvas.height) this.vy *= -1; }
+            draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = 'rgba(212, 168, 83, 0.6)'; ctx.fill(); }
         }
-
-        function init() {
-            particles = [];
-            const count = Math.floor((canvas.width * canvas.height) / 10000);
-            for (let i = 0; i < count; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function connect() {
-            for (let a = 0; a < particles.length; a++) {
-                for (let b = a + 1; b < particles.length; b++) {
-                    let dx = particles[a].x - particles[b].x;
-                    let dy = particles[a].y - particles[b].y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) {
-                        ctx.strokeStyle = `rgba(212,163,115,${0.35 - dist/340})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
-                    }
+        for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+        function drawLines() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y, dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < maxDistance) { ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.strokeStyle = `rgba(212, 168, 83, ${0.2 * (1 - dist / maxDistance)})`; ctx.lineWidth = 0.5; ctx.stroke(); }
                 }
             }
         }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            connect();
-            requestAnimationFrame(animate);
-        }
-
-        hero.addEventListener('mousemove', e => {
-            let rect = hero.getBoundingClientRect();
-            mouse.x = e.clientX - rect.left;
-            mouse.y = e.clientY - rect.top;
-        });
-        hero.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
-
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); drawLines(); requestAnimationFrame(animate); }
         animate();
     </script>
 </body>
